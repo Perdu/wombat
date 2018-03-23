@@ -21,6 +21,8 @@ To ensure communication between the sensor nodes and the server, the _Wombat_ sy
 - **User interface**: a device in charge of displaying detailed information about one or several tracked devices (see figure below). The device to display can be specified manually by its MAC address or through proximity detection.
 - **Opt-out node**: an element in charge of implementing an opt-out mechanism for users refusing to be tracked by the system.
 
+The system is made to work on a dedicated network (the server includes a DHCP server). Nodes can be switched off at any time (they function in read-only mode to be crash-proof).
+
 Architecture of the Wombat system in a demonstration configuration:
 ![Architecture of the Wombat system in a demonstration configuration](figures/Wombat.png?raw=true "Architecture of the Wombat system in a demonstration configuration")
 
@@ -89,6 +91,8 @@ pacman -Syu
 ansible-playbook -i <ip>, --ask-sudo-pass -k bootstrap.yml --extra-vars "user=wombat"
 ```
 
-You now have a basic system installed. You can use the different ansible scripts depending on what the machine is going to be: a node (node.yml), the server (server.yml) or an optout server (run node.yml, then optout.yml). Read instructions at the beginning of each of these files.
+You now have a basic system installed. You can use the different ansible scripts in the ansible/ folder depending on what the machine is going to be: a node (node.yml), the server (server.yml) or an optout server (run node.yml, then optout.yml). Read instructions at the beginning of each of these files.
+
+The system is made to work on a dedicated network. Once installed, remove the server from any existing network as its DHCP server may disrupt it proper functioning. Once every machines are installed and configured, link them all to a common switch and you're ready to go. You can add your own machine to the switch and query the server using the frontend/query_server.py script. The server's IP address will be 172.23.0.1 and the rest of the nodes will be on the 172.23.0.1/24 network.
 
 To configure the different modes presented in above section, edit ansible/files/server/server_config.json before install, or /etc/wombat/server_config.json on the server after install.
