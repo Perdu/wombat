@@ -4,8 +4,8 @@ An experimental Wi-Fi tracking system aiming at improving user awereness toward 
 
 ## Links
 
-[White paper: Wombat: An experimental Wi-Fi tracking system](https://hal.inria.fr/hal-01679007/document)
-[Thesis: Wi-Fi Tracking: Fingerprinting Attacks and Counter-Measures](https://hal.archives-ouvertes.fr/tel-01659783/)
+- [White paper: Wombat: An experimental Wi-Fi tracking system](https://hal.inria.fr/hal-01679007/document)
+- [Thesis: Wi-Fi Tracking: Fingerprinting Attacks and Counter-Measures](https://hal.archives-ouvertes.fr/tel-01659783/)
 
 ## Already added privacy-preserving mechanism
 
@@ -21,7 +21,10 @@ To ensure communication between the sensor nodes and the server, the _Wombat_ sy
 - **User interface**: a device in charge of displaying detailed information about one or several tracked devices (see figure below). The device to display can be specified manually by its MAC address or through proximity detection.
 - **Opt-out node**: an element in charge of implementing an opt-out mechanism for users refusing to be tracked by the system.
 
-![Architecture of the Wombat system in a demonstration configuration](figures/Wombat.pdf?raw=true "Architecture of the Wombat system in a demonstration configuration")
+Architecture of the Wombat system in a demonstration configuration:
+![Architecture of the Wombat system in a demonstration configuration](figures/Wombat.png?raw=true "Architecture of the Wombat system in a demonstration configuration")
+
+Basic user interface of Wombat displaying the device’s MAC address, the list of SSIDs, as well as a mobility trace under a timeline form:
 ![Basic user interface of Wombat displaying the device’s MAC address, the list of SSIDs, as well as a mobility trace under a timeline form](figures/front-end.png?raw=true "Basic user interface of Wombat displaying the device’s MAC address, the list of SSIDs, as well as a mobility trace under a timeline form")
 
 ## Content
