@@ -75,6 +75,7 @@ and push it to the server using push_server.yml.
 # Install
 
 **Required hardware:** the nodes and opt-out machines should all have Wi-Fi cards handling monitor mode connected to them. We tested this system on Raspberry Pi 2 and 3 with TP-LINK TL-WN722N dongles. If running with blind_mode=True, the server should also have a Wi-Fi card. All the machines must be connected using a switch on a independant network.
+For instance, to run 4 nodes, a server and an optout node, you will need: 6 machines (e.g. 6 raspberry pis, and the same number of SD cards and power supplies), 6 monitor-mode-able Wi-Fi cards, one switch with enough ports, and 6 ethernet cables (+1 to connect you own machine to run front-end scripts).
 
 The system can be easily installed on top of an existing Arch Linux install using ansibles scripts in the ansible folder.
 To install each component from scratch:
