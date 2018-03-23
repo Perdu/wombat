@@ -111,3 +111,4 @@ If everything works properly, a wombat picture should appear. When a phone is mo
 ## Todo
 
 - Pre-installed SD card images for raspberry 3 may be added for easier install.
+- Describe all configuration options
