@@ -69,3 +69,26 @@ The system comports several modes:
 
 To change system mode, update the server configuration in ansible/files/server/server_config.json
 and push it to the server using push_server.yml.
+
+# Install
+
+The system can be easily installed on top of an existing Arch Linux install using ansibles scripts in the ansible folder.
+To install each component from scratch:
+- download and install an Arch Linux image on a machine.
+- boot the machine and log in
+- type the following commands to create a new user, change his password, and update the system:
+```bash
+su -
+useradd -m -G wheel -s /bin/bash wombat
+passwd wombat # chose a new password
+pacman -Syu
+```
+- note the machine's IP address
+- Execute the bootstrap script with ansible:
+```bash
+ansible-playbook -i <ip>, --ask-sudo-pass -k bootstrap.yml --extra-vars "user=wombat"
+```
+
+You now have a basic system installed. You can use the different ansible scripts depending on what the machine is going to be: a node (node.yml), the server (server.yml) or an optout server (run node.yml, then optout.yml). Read instructions at the beginning of each of these files.
+
+To configure the different modes presented in above section, edit ansible/files/server/server_config.json before install, or /etc/wombat/server_config.json on the server after install.
