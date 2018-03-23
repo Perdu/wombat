@@ -74,6 +74,8 @@ and push it to the server using push_server.yml.
 
 # Install
 
+**Required hardware:** the nodes and opt-out machines should all have Wi-Fi cards handling monitor mode connected to them. We tested this system on Raspberry Pi 2 and 3 with TP-LINK TL-WN722N dongles. If running with blind_mode=True, the server should also have a Wi-Fi card. All the machines must be connected using a switch on a independant network.
+
 The system can be easily installed on top of an existing Arch Linux install using ansibles scripts in the ansible folder.
 To install each component from scratch:
 - download and install an Arch Linux image on a machine.
@@ -90,10 +92,7 @@ pacman -Syu
 ```bash
 ansible-playbook -i <ip>, --ask-sudo-pass -k bootstrap.yml --extra-vars "user=wombat"
 ```
-
 You now have a basic system installed. You can use the different ansible scripts in the ansible/ folder depending on what the machine is going to be: a node (node.yml), the server (server.yml) or an optout server (run node.yml, then optout.yml). Read instructions at the beginning of each of these files.
-
-The nodes and opt-out machines should all have Wi-Fi cards handling monitor mode connected to them. We tested this system on Raspberry Pi 2 and 3 with TP-LINK TL-WN722N dongles.
 
 The system is made to work on a dedicated network. Once installed, remove the server from any existing network as its DHCP server may disrupt it proper functioning. Once every machines are installed and configured, link them all to a common switch and you're ready to go. You can add your own machine to the switch and query the server using the frontend/query_server.py script. The server's IP address will be 172.23.0.1 and the rest of the nodes will be on the 172.23.0.1/24 network.
 
