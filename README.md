@@ -2,7 +2,9 @@
 
 An experimental Wi-Fi tracking system aiming at improving user awereness toward physical tracking technologies and at experimenting new privacy-preserving mechanisms.
 
-## Links
+## Links and attribution
+
+Developed by Célestin Matte and Mathieu Cunche during Célestin Matte's PhD thesis (see link above), at INSA Lyon, in Inria's Privatics team, under a Région Rhône-Alpes's ARC7 funding.
 
 - [White paper: Wombat: An experimental Wi-Fi tracking system](https://hal.inria.fr/hal-01679007/document)
 - [Thesis: Wi-Fi Tracking: Fingerprinting Attacks and Counter-Measures](https://hal.archives-ouvertes.fr/tel-01659783/)
