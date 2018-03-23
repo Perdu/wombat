@@ -93,6 +93,15 @@ ansible-playbook -i <ip>, --ask-sudo-pass -k bootstrap.yml --extra-vars "user=wo
 
 You now have a basic system installed. You can use the different ansible scripts in the ansible/ folder depending on what the machine is going to be: a node (node.yml), the server (server.yml) or an optout server (run node.yml, then optout.yml). Read instructions at the beginning of each of these files.
 
+The nodes and opt-out machines should all have Wi-Fi cards handling monitor mode connected to them. We tested this system on Raspberry Pi 2 and 3 with TP-LINK TL-WN722N dongles.
+
 The system is made to work on a dedicated network. Once installed, remove the server from any existing network as its DHCP server may disrupt it proper functioning. Once every machines are installed and configured, link them all to a common switch and you're ready to go. You can add your own machine to the switch and query the server using the frontend/query_server.py script. The server's IP address will be 172.23.0.1 and the rest of the nodes will be on the 172.23.0.1/24 network.
 
 To configure the different modes presented in above section, edit ansible/files/server/server_config.json before install, or /etc/wombat/server_config.json on the server after install.
+
+To have a machine configured as an automatic front-end:
+- set blind_mode=True and using_sensor=False on the server
+- add the machine's MAC address in ansible/files/server/dhcpd.conf (before install) or in /etc/dhcpd.conf on the server (after install) in the "yourdevice" host and restart DHCP server. The target machine should obtain the 172.23.0.3 IP address.
+- on the machine, run python blind_server.py
+- also, note that the server should have a functioning Wi-Fi card supporting monitor mode connected to it.
+If everything works properly, a wombat picture should appear. When a phone is moved close to the server's Wi-Fi card, the wombat picture should be replaced by the user interface presented in picture above.
