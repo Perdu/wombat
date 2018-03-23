@@ -105,3 +105,7 @@ To have a machine configured as an automatic front-end:
 - on the machine, run python blind_server.py
 - also, note that the server should have a functioning Wi-Fi card supporting monitor mode connected to it.
 If everything works properly, a wombat picture should appear. When a phone is moved close to the server's Wi-Fi card, the wombat picture should be replaced by the user interface presented in picture above.
+
+## Todo
+
+- Pre-installed SD card images for raspberry 3 may be added for easier install.
