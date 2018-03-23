@@ -60,7 +60,7 @@ watch -n 10 python query_server.py stats <topology_file>
   The other server_*.yml etc. correspond to equivalent files for various use cases.
   Note that node.yml, server.yml and optout.yml can be run multiple times without problem.
 
-The system comports several modes:
+The system can be run in different modes:
 - blind_mode=false: the server has to be directly queried to give any information about devices.
 - blind_mode=true, using_sensor=false: a Wi-Fi dongle is plugged to the server and
   detect close devices. Timelines are sent to the front-end (frontend_ip),
@@ -93,7 +93,7 @@ pacman -Syu
 ```bash
 ansible-playbook -i <ip>, --ask-sudo-pass -k bootstrap.yml --extra-vars "user=wombat"
 ```
-You now have a basic system installed. You can use the different ansible scripts in the ansible/ folder depending on what the machine is going to be: a node (node.yml), the server (server.yml) or an optout server (run node.yml, then optout.yml). Read instructions at the beginning of each of these files.
+You now have a basic system installed. You can use the different ansible scripts in the ansible/ folder depending on what the machine is going to be: a node (node.yml), the server (run node.yml, then server.yml) or an optout server (run node.yml, then optout.yml). Read instructions at the beginning of each of these files.
 
 The system is made to work on a dedicated network. Once installed, remove the server from any existing network as its DHCP server may disrupt it proper functioning. Once every machines are installed and configured, link them all to a common switch and you're ready to go. You can add your own machine to the switch and query the server using the frontend/query_server.py script. The server's IP address will be 172.23.0.1 and the rest of the nodes will be on the 172.23.0.1/24 network.
 
