@@ -1,0 +1,51 @@
+{
+    "nodes": [
+        {
+	    "name": "Nœud 2",
+	    "id": "b8:27:eb:cd:9c:56",
+	    "zone_id": 0
+	},
+	{
+	    "name": "Nœud 4",
+	    "id": "b8:27:eb:fc:d0:20",
+	    "zone_id": 1
+	},
+	{
+	    "name": "Nœud 1",
+	    "id": "b8:27:eb:11:96:e1",
+	    "zone_id": 2
+	},
+	{
+	    "name": "Nœud 2",
+	    "id": "b8:27:eb:30:d6:36",
+	    "zone_id": 3
+	},
+	{
+	    "name": "Nœud 3",
+	    "id": "b8:27:eb:18:bc:01",
+	    "zone_id": 4
+	}
+    ],
+    "zones": [
+	{
+	    "id" : 0,
+	    "name" : "Nœud 2"
+	},
+	{
+	    "id" : 1,
+	    "name" : "Nœud 4"
+	},
+	{
+	    "id" : 2,
+	    "name" : "Nœud 1"
+	},
+	{
+	    "id" : 3,
+	    "name" : "Nœud 2"
+	},
+	{
+	    "id" : 4,
+	    "name" : "Nœud 3"
+	}
+    ]
+}

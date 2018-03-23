@@ -1,0 +1,10 @@
+{
+    "node_id": 0,
+    "iface": "{{ iface }}",
+    "server_ip": "{{ server_ip }}",
+    "server_port": 4001,
+    "capture_probes_only": true,
+    "use_date_sync": true,
+    "date_sync_port": 4005,
+    "log_file": "/var/log/wombat_node.log"
+}

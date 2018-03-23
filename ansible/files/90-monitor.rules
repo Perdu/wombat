@@ -1,0 +1,1 @@
+ACTION=="add", KERNEL=="wlan*", RUN+="/usr/bin/iwconfig %k mode monitor"

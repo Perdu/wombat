@@ -1,0 +1,11 @@
+---
+# Add in /etc/ansible/ansible.cfg: remote_tmp = /tmp/ansible/
+# run this after node.yml
+# execute with:
+#  ansible-playbook -i <ip>, --ask-sudo-pass optout.yml
+- hosts: all
+  user: wombat
+  become: true
+  gather_facts: false
+  tasks:
+    - include: tasks/optout.yml server_ip=172.23.0.1 reduced_signal_strength=true

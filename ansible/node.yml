@@ -1,0 +1,12 @@
+---
+# Add in /etc/ansible/ansible.cfg: remote_tmp = /tmp/ansible/
+# user wombat must be already created
+# execute with:
+#  ansible-playbook -i <ip>, --ask-sudo-pass node.yml
+- hosts: all
+  user: wombat
+  become: true
+  gather_facts: false
+  tasks:
+   - include: tasks/node.yml server_ip=172.23.0.1 iface=wlan1
+# iface = wlan0 for pi2, wlan1 for pi3

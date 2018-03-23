@@ -1,0 +1,87 @@
+{
+    "nodes": [
+        {
+	    "name": "Table 30",
+	    "id": "b8:27:eb:a8:18:04",
+	    "zone_id": 30
+	},
+	{
+	    "name": "Table 22",
+	    "id": "b8:27:eb:ad:08:1e",
+	    "zone_id": 22
+	},
+	{
+	    "name": "Table 20",
+	    "id": "b8:27:eb:b2:53:d8",
+	    "zone_id": 20
+	},
+	{
+	    "name": "Table 2",
+	    "id": "b8:27:eb:82:d1:bd",
+	    "zone_id": 2
+	},
+	{
+	    "name": "Table 17",
+	    "id": "b8:27:eb:07:26:06",
+	    "zone_id": 17
+	},
+	{
+	    "name": "Table 14",
+	    "id": "b8:27:eb:f8:ef:78",
+	    "zone_id": 14
+	},
+	{
+	    "name": "Table 6",
+	    "id": "b8:27:eb:47:bb:6c",
+	    "zone_id": 6
+	},
+	{
+	    "name": "Table 9",
+	    "id": "b8:27:eb:62:d6:de",
+	    "zone_id": 9
+	},
+	{
+	    "name": "Table 11",
+	    "id": "b8:27:eb:bd:bb:28",
+	    "zone_id": 11
+	}
+    ],
+    "zones": [
+	{
+	    "id" : 30,
+	    "name" : "Table 30"
+	},
+	{
+	    "id" : 22,
+	    "name" : "Table 22"
+	},
+	{
+	    "id" : 20,
+	    "name" : "Table 20"
+	},
+	{
+	    "id" : 2,
+	    "name" : "Table 2"
+	},
+	{
+	    "id" : 17,
+	    "name" : "Table 17"
+	},
+	{
+	    "id" : 14,
+	    "name" : "Table 14"
+	},
+	{
+	    "id" : 6,
+	    "name" : "Table 6"
+	},
+	{
+	    "id" : 9,
+	    "name" : "Table 9"
+	},
+	{
+	    "id" : 11,
+	    "name" : "Table 11"
+	}
+    ]
+}

@@ -1,0 +1,59 @@
+{
+    "nodes": [
+        {
+	    "name": ".2 avant-salle (675)",
+	    "id": "b8:27:eb:ad:61:dd",
+	    "zone_id": 2
+	},
+	{
+	    "name": ".4 fond salle (653)",
+	    "id": "b8:27:eb:cd:9c:56",
+	    "zone_id": 4
+	},
+	{
+	    "name": "10.8 (697) tableau coin",
+	    "id": "b8:27:eb:db:32:6a",
+	    "zone_id": 8
+	},
+	{
+	    "name": "10.9 (671) optout",
+	    "id": "b8:27:eb:a8:62:01",
+	    "zone_id": 9
+	},
+	{
+	    "name": "10.10 front-end",
+	    "id": "b8:27:eb:35:12:ff",
+	    "zone_id": 12
+	}
+    ],
+    "zones": [
+	{
+	    "id" : 2,
+	    "name" : "avant-salle"
+	},
+	{
+	    "id" : 4,
+	    "name" : "milieu salle"
+	},
+	{
+	    "id" : 8,
+	    "name" : "tableau coin"
+	},
+	{
+	    "id" : 9,
+	    "name" : "optout"
+	},
+	{
+	    "id" : 10,
+	    "name" : "to be done"
+	},
+	{
+	    "id" : 11,
+	    "name" : "to be done"
+	},
+	{
+	    "id" : 12,
+	    "name" : "to be done"
+	}
+    ]
+}

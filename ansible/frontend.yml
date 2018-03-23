@@ -1,0 +1,11 @@
+---
+# Add in /etc/ansible/ansible.cfg: remote_tmp = /tmp/ansible/
+# run this after node.yml
+# execute with:
+#  ansible-playbook -i <ip>, --ask-sudo-pass frontend.yml
+- hosts: all
+  user: wombat
+  become: true
+  gather_facts: false
+  tasks:
+    - include: tasks/frontend.yml

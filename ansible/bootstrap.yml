@@ -1,0 +1,39 @@
+---
+# Add in /etc/ansible/ansible.cfg: remote_tmp = /tmp/ansible/
+# user wombat must be already created:
+# - boot the raspberry pi with a fresh image (alarm:alarm), then
+#   su - (root), then
+#   useradd -m -G wheel -s /bin/bash wombat
+#   passwd wombat
+#   pacman -Syu
+# - Note the raspi's ip
+# - Execute this script with:
+#   ansible-playbook -i <ip>, --ask-sudo-pass -k bootstrap.yml --extra-vars "user=wombat"
+#   use wombat's pass to log in, root password (root) for su
+- hosts: all
+  gather_facts: False
+#  user: wombat
+  user: "{{ user }}"
+  tasks:
+   - name : install python to use ansible modules
+     become: true
+     become_method: su
+     raw: test -e /usr/bin/python || pacman --noconfirm -S python
+
+- hosts: all
+  user: "{{ user }}"
+  become: true
+  become_method: su
+  tasks:
+   - name : install sudo
+     pacman: name=sudo state=present
+   - name : check that the wheel group exists
+     group: name=wheel state=present
+   - name : edit sudoer file
+     lineinfile:
+       dest: /etc/sudoers
+       state: present
+       regexp: '^%wheel'
+       line: '%wheel ALL=(ALL) ALL'
+   - name : Disable root user passwd
+     shell: passwd -l root

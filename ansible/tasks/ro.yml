@@ -1,0 +1,2 @@
+- name : ro
+  raw: mount -o remount,ro /

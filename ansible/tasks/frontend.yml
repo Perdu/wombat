@@ -1,0 +1,42 @@
+- include : tasks/rw.yml
+- name : disable sniffer service
+  systemd: name=sniffer enabled=no state=stopped
+- name : mkdir frontend
+  become: false
+  file: path=frontend state=directory
+- name : Add blind server script
+  become: false
+  copy: src=../frontend/blind_server.py dest=frontend/ mode="u+x"
+- name : Add blind server lib
+  become: false
+  copy: src=../frontend/draw_timeline.py dest=frontend/ mode="u+x"
+- name : Add blind server img
+  become: false
+  copy: src=../frontend/wombat.png dest=frontend/
+- name : remove udev rule for wlan0 monitor
+  file: state=absent path=/etc/udev/rules.d/
+- name : rw boot
+  raw: mount -o remount,rw /boot/
+- name : pacman -Syu
+  pacman: update_cache=yes upgrade=yes
+- name : rwo boot
+  raw: mount -o remount,ro /boot/
+- name : install i3 xorg-xinit xorg-server xf86-video-fbdev xterm rxvt-unicode python2-dateutil python2-matplotlib python2-pyside python2-pillow tk ttf-dejavu
+  pacman: name=i3,xorg-xinit,xorg-server,xf86-video-fbdev,xterm,rxvt-unicode,python2-dateutil,python2-matplotlib,python2-pyside,python2-pillow,tk,ttf-dejavu state=present
+- name : sudo mkdir /etc/systemd/system/getty@tty1.service.d/
+  file: path=/etc/systemd/system/getty@tty1.service.d/ state=directory
+- name : Add override.conf (for autologin)
+  copy: src=files/frontend/override.conf dest=/etc/systemd/system/getty@tty1.service.d/
+- name : add .bash_profile to auto startx at startup
+  become: false
+  copy: src=files/frontend/.bash_profile dest=~/ mode="u+x"
+- name : Add .xinitrc to autostart i3
+  become: false
+  copy: src=files/frontend/.xinitrc dest=~/ mode="u+x"
+- name : mkdir .i3/
+  become: false
+  file: path=.i3/ state=directory
+- name : Add i3 config
+  become: false
+  copy: src=files/frontend/config dest=.i3/ mode="u+x"
+- include : tasks/ro.yml

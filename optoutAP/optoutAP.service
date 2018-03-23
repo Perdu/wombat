@@ -1,0 +1,13 @@
+[Unit]
+Description=Start wombat's output AP
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/local/bin/launch_optout.sh
+TimeoutSec=0
+StandardOutput=tty
+RemainAfterExit=no
+
+[Install]
+WantedBy=default.target

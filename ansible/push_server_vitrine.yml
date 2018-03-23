@@ -1,0 +1,19 @@
+---
+# execute with:
+#  ansible-playbook -i 10.0.10.1, --ask-sudo-pass push_server_vitrine.yml
+- hosts: all
+  user: wombat
+  become: true
+  gather_facts: false
+  tasks:
+   - include : tasks/rw.yml
+   - name : Add server script
+     become: false
+     copy: src=../server/server.py dest=server/ mode="u+x"
+   - name : add config file server_config.json # contains frontend IP
+     copy: src=files/server_salle_vitrine/server_config.json dest=/etc/wombat/
+   - name : add config file topology.json # contains nodes MAC addresses
+     copy: src=files/server_salle_vitrine/topology.json dest=/etc/wombat/
+   - name : restart server service
+     systemd: name=server state=restarted
+   - include : tasks/ro.yml

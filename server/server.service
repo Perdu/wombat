@@ -1,0 +1,10 @@
+[Unit]
+Description=Start wombat's server
+After=network.target
+
+[Service]
+ExecStart=/home/wombat/server/server.py
+Type=simple
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,6 @@
+{
+    "hostapd_config_file": "/etc/wombat/hostapd_optoutAP.cfg",
+    "server_ip": "{{ server_ip }}",
+    "server_port": 4006,
+    "reduced_signal_strength": {{ reduced_signal_strength }}
+}

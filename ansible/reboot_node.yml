@@ -1,0 +1,15 @@
+---
+# Add in /etc/ansible/ansible.cfg: remote_tmp = /tmp/ansible/
+# user wombat must be already created
+# execute with:
+#  ansible-playbook -i <ip>, --ask-sudo-pass node.yml
+- hosts: all
+  user: wombat
+  become: true
+  gather_facts: false
+  tasks:
+   - name : reboot
+     command: /sbin/shutdown -r +1
+     async: 0
+     poll: 0
+     ignore_errors: true

@@ -1,0 +1,10 @@
+[Unit]
+Description=Start the node's sniffer
+After=network.target
+
+[Service]
+ExecStart=/home/wombat/nodes/sniffer.py
+Type=simple
+
+[Install]
+WantedBy=default.target

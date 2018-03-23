@@ -1,0 +1,18 @@
+---
+# execute with:
+#  ansible-playbook -i <ip>, --ask-sudo-pass server.yml
+- hosts: all
+  user: wombat
+  become: true
+  tasks:
+   - include : tasks/rw.yml
+   - name : Add server script
+     become: false
+     copy: src=../server/server.py dest=server/ mode="u+x"
+#   - name : add config file server_config.json # contains frontend IP
+#     copy: src=files/server/server_config.json dest=/etc/wombat/
+   - name : add config file topology.json # contains nodes MAC addresses
+     copy: src=files/server/topology.json dest=/etc/wombat/
+   - include : tasks/ro.yml
+   - name : restart server service
+     systemd: name=server state=restarted

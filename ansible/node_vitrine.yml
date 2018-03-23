@@ -1,0 +1,12 @@
+---
+# Add in /etc/ansible/ansible.cfg: remote_tmp = /tmp/ansible/
+# user wombat must be already created
+# execute with:
+# ansible-playbook -i 10.0.10.2,10.0.10.4,10.0.1.13 --ask-sudo-pass node_vitrine.yml
+- hosts: all
+  user: wombat
+  become: true
+  gather_facts: false
+  tasks:
+   - include: tasks/node.yml server_ip=10.0.10.1 iface=wlan1
+# iface = wlan1 for raspi3, wlan0 for raspi2

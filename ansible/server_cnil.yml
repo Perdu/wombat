@@ -1,0 +1,53 @@
+---
+# Add in /etc/ansible/ansible.cfg: remote_tmp = /tmp/ansible/
+# run this after node.yml
+# execute with:
+#  ansible-playbook -i 172.23.0.1, --ask-sudo-pass -k server_cnil.yml
+- hosts: all
+  user: wombat
+  become: true
+  tasks:
+#   - name : ro
+#     mount: opts=remount,ro name=/ state=mounted src=/ fstype=ext4
+   - name : rw
+     raw: mount -o remount,rw /
+   - name : add config file server_config.json # contains frontend IP
+     copy: src=files/server_cnil/server_config.json dest=/etc/wombat/
+   - name : add config file topology.json # contains nodes MAC addresses
+     copy: src=files/server_cnil/topology.json dest=/etc/wombat/
+   - name : add oui.txt
+     copy: src=../server/oui.txt dest=/etc/wombat/
+   - name : add whitelist
+     copy: src=../server/white_list.txt dest=/etc/wombat/
+   - name : add blacklist
+     copy: src=files/server/black_list.txt dest=/etc/wombat/
+   - name : mkdir server
+     become: false
+     file: path=server state=directory
+   - name : Add server script
+     become: false
+     copy: src=../server/server.py dest=server/ mode="u+x"
+   - name : Add server service
+     copy: src=../server/server.service dest=/etc/systemd/system/
+   - name : enable server service
+     systemd: name=server enabled=yes state=started
+   - name : disable sniffer service
+     systemd: name=sniffer enabled=no state=stopped
+   - name : copy server fstab # different from node's one because of dhcpd bug workaround
+     copy: src=files/server/fstab dest=/etc/fstab
+   - name : add dhcpd bug workaround service
+     copy: src=files/server/pre-dhcp.service dest=/etc/systemd/system/
+   - name : enable dhcpd bug workaround service
+     systemd: name=pre-dhcp.service enabled=yes state=started
+   - name : add network config
+     copy: src=files/server/eth0.network dest=/etc/systemd/network/eth0.network
+   - name : install dhcpd
+     pacman: name=dhcp state=present
+   - name : copy dhcpd config file
+     copy: src=files/server/dhcpd.conf dest=/etc/
+   - name : add dhcpd service
+     copy: src=files/server/dhcpd@.service dest=/etc/systemd/system/
+   - name : enable dhcpd
+     systemd: name=dhcpd@eth0 enabled=yes state=started
+   - name : ro
+     raw: mount -o remount,ro /

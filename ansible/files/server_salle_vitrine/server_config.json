@@ -1,0 +1,42 @@
+{
+    "system_params": {
+	"topology_file" : "/etc/wombat/topology.json",
+	"blacklist_ssid": "Pas de suivi wi-fi. Do not track",
+	"blacklist_expiry_delay": 10800,
+	"production": true
+    },
+    "server_params": {
+	"server_name": "server_0",
+	"reporting_port": 4001,
+	"querying_port": 4002,
+	"optout_port": 4006,
+	"query_server_timeline_resolution": 1,
+	"device_expiry_delay": 900,
+	"stats_time_window": 300,
+	"check_report_deltatime": false,
+	"report_deltatime_tolerance": 5,
+	"log_file": "/var/log/wombat_server.log",
+	"black_list_file": "/etc/wombat/black_list.txt",
+	"white_list_file": "/etc/wombat/white_list.txt",
+	"OUI_file": "/etc/wombat/oui.txt",
+	"nodes_rssi_threshold": -65,
+	"min_apparition_length": 10,
+	"max_burst_duration": 4,
+	"batch_size": 3
+    },
+    "blind_mode" : {
+	"blind_mode": true,
+	"using_sensor": false,
+	"sensor_window_seconds": 10,
+	"interface": "wlan0",
+	"rssi_detection_threshold": -30,
+	"frontend_ip": "10.0.10.10",
+	"frontend_port": 4003,
+	"max_time_burst": 500
+    },
+    "date_sync" : {
+	"use_date_sync": true,
+	"frontend_port": 4004,
+	"node_port": 4005
+    }
+}

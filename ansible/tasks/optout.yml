@@ -1,0 +1,27 @@
+- include : tasks/rw.yml
+- name : disable sniffer service
+  systemd: name=sniffer enabled=no state=stopped
+- name : mkdir optoutAP
+  become: false
+  file: path=optoutAP state=directory
+- name : Add optoutAP script
+  become: false
+  copy: src=../optoutAP/optoutAP.py dest=optoutAP/ mode="u+x"
+- name : add config file optoutAP_config.json # contains server IP
+  template: src=files/optoutAP/optoutAP_config.json dest=/etc/wombat/
+- name : add config file hostapd_optoutAP.cfg
+  copy: src=../optoutAP/hostapd_optoutAP.cfg dest=/etc/wombat/
+- name : install hostapd
+  pacman: name=hostapd state=present
+- name : Add optoutAP service
+  copy: src=../optoutAP/optoutAP.service dest=/etc/systemd/system/
+- name : Add optoutAP launcher
+  copy: src=../optoutAP/launch_optout.sh dest=/usr/local/bin/ mode="u+x"
+- name : remove udev rule for wlan0 monitor
+  file: state=absent path=/etc/udev/rules.d/
+- name : bring wlan0 up
+  # nmcli: name=wlan0 ifname=wlan0 state=present
+  shell: ifconfig wlan0 up
+- name : enable optoutAP service
+  systemd: name=optoutAP enabled=yes state=started
+- include : tasks/ro.yml

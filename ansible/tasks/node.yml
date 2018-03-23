@@ -1,0 +1,53 @@
+- include : tasks/rw.yml
+- name : Add udev rule for monitor
+  copy: src=files/90-monitor.rules dest=/etc/udev/rules.d/
+- name : add network config
+  copy: src=files/node/eth0.network dest=/etc/systemd/network/eth0.network
+# Stuff for read-only filesystem
+- name : disable systemd-random-seed
+  systemd: name=systemd-random-seed enabled=no state=stopped
+- name : Add ro fstab
+  copy: src=files/fstab dest=/etc/fstab
+- name : remount /boot as rw
+  shell: mount -o remount,rw /boot
+- name : Add /boot/cmdline.txt with ro directive
+  copy: src=files/cmdline.txt dest=/boot/ # to add "fastboot noswap ro"
+- name : remount /boot as ro
+  shell: mount -o remount,ro /boot
+# Add sniffer stuff
+- name : mkdir nodes
+  become: false
+  file: path=nodes state=directory
+- name : Add sniffer script
+  become: false
+  copy: src=../nodes/sniffer.py dest=nodes/ mode="u+x"
+- name : Add sniffer service
+  copy: src=../nodes/sniffer.service dest=/etc/systemd/system/
+- name : mkdir /etc/wombat/
+  file: path=/etc/wombat/ state=directory
+- name : add config file node_config.json # contains server IP and iface
+  template: src=files/node/node_config.json dest=/etc/wombat/
+- name : set timezone
+  timezone: name=Europe/Paris
+- name : Add current device's public ssh key
+  become: false
+  authorized_key: user=wombat key="{{ lookup('file', '~/.ssh/id_rsa.pub') }}"
+- name : add rw an ro aliases
+  become: false
+  lineinfile:
+    dest: ~/.bashrc
+    state: present
+    regexp: '^alias ro'
+    line: "alias ro='sudo mount -o remount,ro /' ; alias rw='sudo mount -o remount,rw /'"
+- name : install wireless_tools # (seems necessary for raspberry pi 3)
+  pacman: name=wireless_tools state=present
+# sniffer dependencies
+- name : install python2.7
+  pacman: name=python2 state=present
+- name : install python2-pcapy
+  pacman: name=python2-pcapy state=present
+- name : install python2-netifaces
+  pacman: name=python2-netifaces state=present
+- name : enable and restart sniffer service
+  systemd: name=sniffer enabled=yes state=restarted
+- include : tasks/ro.yml

@@ -1,0 +1,20 @@
+---
+# execute with:
+#  ansible-playbook -i <ip>, --ask-sudo-pass push_server_volant.yml
+- hosts: all
+  user: wombat
+  become: true
+  tasks:
+   - name : rw
+     raw: mount -o remount,rw /
+   - name : Add server script
+     become: false
+     copy: src=../server/server.py dest=server/ mode="u+x"
+   - name : add config file server_config.json # contains frontend IP
+     copy: src=files/server_volant/server_config.json dest=/etc/wombat/
+   - name : add config file topology.json # contains nodes MAC addresses
+     copy: src=files/server_volant/topology.json dest=/etc/wombat/
+   - name : ro
+     raw: mount -o remount,ro /
+   - name : restart server service
+     systemd: name=server state=restarted

@@ -1,0 +1,17 @@
+---
+# execute with:
+#  ansible-playbook -i <ip>, --ask-sudo-pass restart_wireless_interface.yml
+# UNTESTED
+- hosts: all
+  user: wombat
+  become: true
+  gather_facts: false
+  tasks:
+   - name : stop sniffer service
+     systemd: name=sniffer state=stopped
+   - name : ifconfig wlan0 down
+     shell: ifconfig wlan0 down
+   - name : ifconfig wlan0 up
+     shell: ifconfig wlan0 up
+   - name : start sniffer service
+     systemd: name=sniffer state=started
