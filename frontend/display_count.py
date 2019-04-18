@@ -10,7 +10,7 @@ from datetime import datetime
 
 def check_argv():
     if len(sys.argv) < 2:
-        print "Error: add file to display"
+        print("Error: add file to display")
         sys.exit(1)
 
 def load_file():
