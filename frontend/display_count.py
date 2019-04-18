@@ -22,8 +22,6 @@ def load_file():
 if __name__ == "__main__":
     check_argv()
     l = load_file()
-    matplotlib.rcParams.update({'savefig.directory': '~/inria/break-randommac/paper/figures/'})
-    matplotlib.rcParams.update({'savefig.format': 'eps'})
     matplotlib.rcParams.update({'figure.figsize' : [8, 5]})
     # No Type 3 font
     matplotlib.rcParams['pdf.fonttype'] = 42
