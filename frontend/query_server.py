@@ -20,6 +20,16 @@ def print_zone(name, j, f):
     else:
         f.write("0,")
 
+def is_random_mac(raw_mac):
+    mac = raw_mac[0:2].decode("hex") + raw_mac[3:5].decode("hex") + raw_mac[6:8].decode("hex")
+    mac_nb = [ord(c) for c in mac]
+    # random mac have locally administered bit set to 1
+    return (mac_nb[0] & 0x02 == 2)
+
+if len(sys.argv) < 2:
+    print "Usage: python2 query_server.py [all|stats|<address>] [lo|v]"
+    sys.exit(1)
+
 if len(sys.argv) > 2:
     if sys.argv[2] in ['lo', 'l', 'localhost', '127.0.0.1']:
         HOST, PORT = "localhost", 4002
@@ -34,12 +44,6 @@ else:
     HOST, PORT = "172.23.0.1", 4002
 data = sys.argv[1].lower()
 dump_file_name = "device_" + data.replace(':','-') + ".json"
-
-def is_random_mac(raw_mac):
-    mac = raw_mac[0:2].decode("hex") + raw_mac[3:5].decode("hex") + raw_mac[6:8].decode("hex")
-    mac_nb = [ord(c) for c in mac]
-    # random mac have locally administered bit set to 1
-    return (mac_nb[0] & 0x02 == 2)
 
 # Create a socket (SOCK_STREAM means a TCP socket)
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
