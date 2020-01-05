@@ -1,0 +1,15 @@
+{
+    "nodes": [
+        {
+	    "name": "Node 1",
+	    "id": "b8:27:eb:00:00:00",
+	    "zone_id": 1
+	}
+    ],
+    "zones": [
+	{
+	    "id" : 1,
+	    "name" : "Main room"
+	}
+    ]
+}
