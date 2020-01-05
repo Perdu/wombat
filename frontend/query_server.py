@@ -1,6 +1,9 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
 
+# usage :
+# python query_server.py [all|stats|<address>] [lo|v]
+
 import socket
 import sys
 import json
@@ -31,10 +34,6 @@ else:
     HOST, PORT = "172.23.0.1", 4002
 data = sys.argv[1].lower()
 dump_file_name = "device_" + data.replace(':','-') + ".json"
-
-
-# usage :
-# python query_server_test_client.py 
 
 # Create a socket (SOCK_STREAM means a TCP socket)
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
