@@ -35,6 +35,12 @@ else:
 data = sys.argv[1].lower()
 dump_file_name = "device_" + data.replace(':','-') + ".json"
 
+def is_random_mac(raw_mac):
+    mac = raw_mac[0:2].decode("hex") + raw_mac[3:5].decode("hex") + raw_mac[6:8].decode("hex")
+    mac_nb = [ord(c) for c in mac]
+    # random mac have locally administered bit set to 1
+    return (mac_nb[0] & 0x02 == 2)
+
 # Create a socket (SOCK_STREAM means a TCP socket)
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -74,8 +80,14 @@ else:
         if data == 'all':
             print
             print "Seen devices:"
+            random_macs = 0
             for x in j["devices"]:
-                print x
+                if not is_random_mac(x):
+                    print x
+                else:
+                    random_macs += 1
+            if random_macs > 0:
+                print "And %d random MAC addresses" % random_macs
         elif data == 'stats':
             print
             print "Number of devices:", sum([j["devices_by_zone"][x] for x in j["devices_by_zone"]])
