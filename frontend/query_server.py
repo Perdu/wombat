@@ -13,6 +13,7 @@ import os
 DATE_FORMAT = "%F %H:%M:%S %z"
 save = False
 LOG_PATH = 'log.txt'
+OUIs = {}
 
 def print_zone(name, j, f):
     if name in j["devices_by_zone"]:
@@ -25,6 +26,21 @@ def is_random_mac(raw_mac):
     mac_nb = [ord(c) for c in mac]
     # random mac have locally administered bit set to 1
     return (mac_nb[0] & 0x02 == 2)
+
+def resolve_oui(device_id):
+    oui = device_id[:8]
+    if oui in OUIs:
+        return OUIs[oui]
+    else:
+        return "unknown"
+
+#load OUIs
+with open("../server/oui.txt", 'r') as oui_file:
+    for l in oui_file:
+        infos = l.split("(hex)")
+        mac = infos[0].strip().replace("-", ":").lower()
+        vendor = infos[1].strip()
+        OUIs[mac] = vendor
 
 if len(sys.argv) < 2:
     print "Usage: python2 query_server.py [all|stats|<address>] [lo|v]"
@@ -87,7 +103,7 @@ else:
             random_macs = 0
             for x in j["devices"]:
                 if not is_random_mac(x):
-                    print x
+                    print "%s (%s)" % (x, resolve_oui(x))
                 else:
                     random_macs += 1
             if random_macs > 0:
