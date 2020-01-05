@@ -1,0 +1,10 @@
+{
+    "node_id": 0,
+    "iface": "wlan0",
+    "server_ip": "127.0.0.1",
+    "server_port": 4001,
+    "capture_probes_only": true,
+    "use_date_sync": true,
+    "date_sync_port": 4005,
+    "log_file": "/var/log/wombat_node.log"
+}
