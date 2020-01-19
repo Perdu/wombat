@@ -418,7 +418,7 @@ class MyTCPQueryHandler(SocketServer.BaseRequestHandler):
             self.request.sendall(json.dumps(j))
         else:
             if not PRODUCTION and self.data == "all":
-                dic = {"devices": device_list.keys()}
+                dic = {"devices": sorted(device_list, key=lambda x: device_list[x].last_seen)}
                 dic["message"] = ""
                 j = json.dumps(dic)
                 self.request.sendall(j)
