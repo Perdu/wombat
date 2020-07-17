@@ -97,11 +97,11 @@ pacman -Syu
 ```bash
 ansible-playbook -i <ip>, --ask-sudo-pass -k bootstrap.yml --extra-vars "user=wombat"
 ```
-You now have a basic system installed. You can use the different ansible scripts in the ansible/ folder depending on what the machine is going to be: a node (node.yml), the server (run node.yml, then server.yml) or an optout server (run node.yml, then optout.yml). Read instructions at the beginning of each of these files.
+You now have a basic system installed. You can use the different ansible scripts in the ansible/ folder depending on what the machine is going to be: a node (`node.yml`), the server (run `node.yml`, then `server.yml`) or an optout server (run `node.yml`, then `optout.yml`). Read instructions at the beginning of each of these files.
 
-The system is made to work on a dedicated network. Once installed, remove the server from any existing network as its DHCP server may disrupt it proper functioning. Once every machines are installed and configured, link them all to a common switch and you're ready to go. You can add your own machine to the switch and query the server using the frontend/query_server.py script. The server's IP address will be 172.23.0.1 and the rest of the nodes will be on the 172.23.0.1/24 network.
+The system is made to work on a dedicated network. Once installed, remove the server from any existing network as its DHCP server may disrupt it proper functioning. Once every machines are installed and configured, link them all to a common switch and you're ready to go. You can add your own machine to the switch and query the server using the `frontend/query_server.py` script. The server's IP address will be 172.23.0.1 and the rest of the nodes will be on the 172.23.0.1/24 network.
 
-To configure the different modes presented in above section, edit ansible/files/server/server_config.json before install, or /etc/wombat/server_config.json on the server after install.
+To configure the different modes presented in above section, edit `ansible/files/server/server_config.json` before install, or `/etc/wombat/server_config.json` on the server after install.
 
 To have a machine configured as an automatic front-end:
 - set `blind_mode=True` and `using_sensor=False` on the server
@@ -121,7 +121,7 @@ Stage: completed project (2017), will not be updated.
 
 This was an experimental research project, please be tolerant with code quality.
 
-Due to the nature of this project (a Wi-Fi tracker), I voluntarily do not make this too easy to install for script kiddies.
+Due to the nature of this project (a Wi-Fi tracker), I voluntarily do not make this too easy to install for script kiddies (for instance by providing raw system images).
 
 This demo was installed:
 - in Cité des Sciences et de l'Industrie in Paris for over a year,
