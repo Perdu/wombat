@@ -36,43 +36,45 @@ Basic user interface of Wombat displaying the device’s MAC address, the list o
 This package contains several folders:
 - the server, node and optoutAP contain the files required to run wombat on the respective machines,
 - the frontend folder contains various scripts which can be used to query the wombat server:
-  * send_time.py is a script to send current time to the server, as required on system startup
-  * draw_timeline.py is used by query_server.py to draw the timeline
-  * query_server.py can be used to query the server directly. Possible queries are:
+  * `send_time.py` is a script to send current time to the server, as required on system startup
+  * `draw_timeline.py` is used by `query_server.py` to draw the timeline
+  * `query_server.py` can be used to query the server directly. Possible queries are:
+```bash
 python query_server.py nodes   # to get the list of connected and fully functioning nodes
 python query_server.py stats   # to get statistics about estimated number of devices seen by the system
 python query_server.py stats <topology_file>   # same, but save results to a log.txt file.
                                                # <topology_file> is required to save results according to the topology of the system.
                                                # Useful when used when display_count.py
 python query_server.py <mac_address>   # to get information about device of address <mac_address>
-  * display_count.py is used to display a diagram of the estimated number of devices seen along time.
-    Use it with query_server.py using a command like this to monitor stats:
-watch -n 10 python query_server.py stats <topology_file>
-  * blind_server.py is a server to display the timeline when the server is configured
-    with modes blind=true and using_sensor=false
+```
+  * `display_count.py` is used to display a diagram of the estimated number of devices seen along time.
+    Use it with `query_server.py`ystem aiming at improving user awereness toward physical tracking technologies and at experimenting new privacy-preserving mechanisms. using a command like this to monitor stats:
+`watch -n 10 python query_server.py stats <topology_file>`
+  * `blind_server.py` is a server to display the timeline when the server is configured
+    with modes `blind=true` and `using_sensor=false`
 - the ansible folder contains ansible scripts to update the system in a single command.
   Running commands are indicated at the beginning of each file.
-  * bootstrap.yml and setup.yml configure a fresh archlinux installation from
-    scratch. See instruction inside the boostrap.yml file.
-  * node.yml configures a node.
-  * server.yml configures the server. Run node.yml first.
-  * optout.yml configures the optout server. Run node.yml first.
-  * push_server.yml updates server using latest code and config file, which is
+  * `bootstrap.yml` and `setup.yml` configure a fresh archlinux installation from
+    scratch. See instruction inside the `boostrap.yml` file.
+  * `node.yml` configures a node.
+  * `server.yml` configures the server. Run `node.yml` first.
+  * `optout.yml` configures the optout server. Run `node.yml` first.
+  * `push_server.yml` updates server using latest code and config file, which is
     faster than running the whole server.yml file.
-  The other server_*.yml etc. correspond to equivalent files for various use cases.
-  Note that node.yml, server.yml and optout.yml can be run multiple times without problem.
+  The other `server_*.yml` etc. correspond to equivalent files for various use cases.
+  Note that `node.yml`, `server.yml` and `optout.yml` can be run multiple times without problem.
 
 The system can be run in different modes:
-- blind_mode=false: the server has to be directly queried to give any information about devices.
-- blind_mode=true, using_sensor=false: a Wi-Fi dongle is plugged to the server and
+- `blind_mode=false`: the server has to be directly queried to give any information about devices.
+- `blind_mode=true`, `using_sensor=false`: a Wi-Fi dongle is plugged to the server and
   detect close devices. Timelines are sent to the front-end (frontend_ip),
-  which must run frontend/blind_server.py to display results
-- blind_mode=true, using_sensor=true: the server has to be queried on port 4003
-  using query "device seen". If a device was seen in the previous sensor_window_seconds seconds,
+  which must run `frontend/blind_server.py` to display results
+- `blind_mode=true`, `using_sensor=true`: the server has to be queried on port 4003
+  using query `device seen`. If a device was seen in the previous `sensor_window_seconds` seconds,
   its timeline is sent back.
 
-To change system mode, update the server configuration in ansible/files/server/server_config.json
-and push it to the server using push_server.yml.
+To change system mode, update the server configuration in `ansible/files/server/server_config.json`
+and push it to the server using `push_server.yml`.
 
 # Install
 
@@ -102,9 +104,9 @@ The system is made to work on a dedicated network. Once installed, remove the se
 To configure the different modes presented in above section, edit ansible/files/server/server_config.json before install, or /etc/wombat/server_config.json on the server after install.
 
 To have a machine configured as an automatic front-end:
-- set blind_mode=True and using_sensor=False on the server
-- add the machine's MAC address in ansible/files/server/dhcpd.conf (before install) or in /etc/dhcpd.conf on the server (after install) in the "yourdevice" host and restart DHCP server. The target machine should obtain the 172.23.0.3 IP address.
-- on the machine, run python blind_server.py
+- set `blind_mode=True` and `using_sensor=False` on the server
+- add the machine's MAC address in ansible/files/server/dhcpd.conf (before install) or in `/etc/dhcpd.conf` on the server (after install) in the "yourdevice" host and restart DHCP server. The target machine should obtain the 172.23.0.3 IP address.
+- on the machine, run `python blind_server.py`
 - also, note that the server should have a functioning Wi-Fi card supporting monitor mode connected to it.
 If everything works properly, a wombat picture should appear. When a phone is moved close to the server's Wi-Fi card, the wombat picture should be replaced by the user interface presented in picture above.
 
@@ -112,3 +114,17 @@ If everything works properly, a wombat picture should appear. When a phone is mo
 
 - Pre-installed SD card images for raspberry 3 may be added for easier install.
 - Describe all configuration options
+
+## Additional notes
+
+Stage: completed project (2017), will not be updated.
+
+This was an experimental research project, please be tolerant with code quality.
+
+Due to the nature of this project (a Wi-Fi tracker), I voluntarily do not make this too easy to install for script kiddies.
+
+This demo was installed:
+- in Cité des Sciences et de l'Industrie in Paris for over a year,
+- in CNIL's LINC showroom,
+- in the CITI laboratory's showroom.
+ystem aiming at improving user awereness toward physical tracking technologies and at experimenting new privacy-preserving mechanisms.
